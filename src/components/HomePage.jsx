@@ -17,6 +17,7 @@ const socket = io(ADDRESS, { transports: ["websocket"] });
 const HomePage = () => {
   const [username, setUsername] = useState("");
   const [message, setMessage] = useState("");
+  const [title, setTitle] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
   const [onlineUsers, setOnlineUsers] = useState([]);
   const [chatHistory, setChatHistory] = useState([]);
@@ -55,6 +56,7 @@ const HomePage = () => {
     e.preventDefault();
 
     const newMessage = {
+      title: title,
       text: message,
       sender: username,
       socketId: socket.id,
@@ -66,6 +68,7 @@ const HomePage = () => {
     });
     setChatHistory([...chatHistory, newMessage]);
     setMessage("");
+    setTitle("")
 
   };
 
@@ -140,15 +143,27 @@ const HomePage = () => {
             )}
           </Form>
           {/* MIDDLE SECTION: CHAT HISTORY */}
-          <ListGroup>
-            {chatHistory.map((message, i) => (
-              <ListGroupItem key={i} className="rounded-pill my-3">
-                <strong>{message.sender}</strong>
-                <span className="mx-1"> | </span>
-                <span>{message.text}</span>
-              </ListGroupItem>
-            ))}
-          </ListGroup>
+            <Form>
+            <FormControl
+                className="rounded-pill"
+                placeholder="Enter title"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                style={{width:"20vw"}}
+              />
+            <ListGroup>
+              {chatHistory.map((message, i) => (
+                <ListGroupItem key={i} className="rounded-pill my-3">
+                  <strong>{message.sender}</strong>
+                  <span className="mx-1"> | </span>
+                  <strong>{message.title}</strong>
+                  <span className="mx-1"> | </span>
+                  <span>{message.text}</span>
+                </ListGroupItem>
+              ))}
+            </ListGroup>
+
+            </Form>
           {/* BOTTOM SECTION: NEW MESSAGE INPUT FIELD */}
           <Form onSubmit={handleMessageSubmit}>
             <FormControl
