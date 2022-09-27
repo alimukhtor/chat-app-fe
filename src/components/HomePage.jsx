@@ -109,7 +109,7 @@ const HomePage = () => {
   };
   return (
     <Container fluid className="px-4">
-      <Row className="my-3" style={{ height: "95vh" }}>
+      <Row className="my-3" style={{ height: "95vh", width:"90vw" }}>
         <Col md={10} className="d-flex flex-column justify-content-between">
           {/* for the main chat window */}
           {/* 3 parts: username input, chat history, new message input */}
