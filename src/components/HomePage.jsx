@@ -12,7 +12,7 @@ import {
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import { io } from "socket.io-client";
 
-const ADDRESS = "http://localhost:3030"; // <-- address of the BACKEND PROCESS
+const ADDRESS = "https://itransition-chat.herokuapp.com"; // <-- address of the BACKEND PROCESS
 const socket = io(ADDRESS, { transports: ["websocket"] });
 const HomePage = () => {
   const [username, setUsername] = useState("");
